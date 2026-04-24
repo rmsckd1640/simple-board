@@ -1,6 +1,7 @@
 package com.example.simple_board.controller;
 
 import com.example.simple_board.domain.Board;
+import com.example.simple_board.dto.BoardUpdateRequest;
 import com.example.simple_board.dto.BoardWriteRequest;
 import com.example.simple_board.service.BoardService;
 import lombok.RequiredArgsConstructor;
@@ -55,5 +56,25 @@ public class BoardController {
         boardService.save(board);
         return "redirect:/board/list"; // 저장 후 목록 페이지로 강제 이동
     }
+
+    /**
+     * 수정 페이지 이동
+     */
+    @GetMapping("/board/edit/{id}")
+    public String editForm(@PathVariable Long id, Model model){
+        Board board = boardService.findById(id);
+        model.addAttribute("board", board);
+        return "board/edit";
+    }
+
+    /**
+     * 수정 실행
+     */
+    @PostMapping("/board/edit/{id}")
+    public String update(@PathVariable Long id, BoardUpdateRequest dto){
+        boardService.update(id, dto);
+        return "redirect:/board/view/" + id; //수정 후 상세 글로 이동
+    }
+
 
 }

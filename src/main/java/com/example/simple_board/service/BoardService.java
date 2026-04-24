@@ -1,6 +1,7 @@
 package com.example.simple_board.service;
 
 import com.example.simple_board.domain.Board;
+import com.example.simple_board.dto.BoardUpdateRequest;
 import com.example.simple_board.entity.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -38,4 +39,13 @@ public class BoardService {
         return boardRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다."));
     }
+
+    @Transactional // 수정 시 반드시 필요!
+    public void update(Long id, BoardUpdateRequest dto) {
+        Board board = findById(id); //기존 글을 영속성 컨텍스트에서 가져옴
+
+        //객체의 값만 바꾸면, 메서드가 끝날 때 jpa가 알아서 db에 반영(dirty checking)
+        board.update(dto.getTitle(), dto.getContent(), dto.getWriter());
+    }
+
 }
