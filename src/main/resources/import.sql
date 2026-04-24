@@ -1,0 +1,1 @@
+INSERT INTO BOARD (TITLE, CONTENT, WRITER, PASSWORD, CREATED_DATE) VALUES ('안녕하세요 첫 글입니다', '반갑습니다 근창입니다.', '장근창', '1234', NOW());
