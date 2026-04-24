@@ -1,14 +1,93 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head><meta charset="UTF-8"><title>글 수정</title></head>
+<head>
+    <meta charset="UTF-8">
+    <title>글 수정</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #f5f7fb;
+            color: #1f2937;
+            padding: 32px 16px;
+        }
+        .container {
+            max-width: 860px;
+            margin: 0 auto;
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
+        }
+        h1 { margin-top: 0; margin-bottom: 20px; font-size: 24px; }
+        .form-group { margin-bottom: 16px; }
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #374151;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font: inherit;
+        }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+        }
+        textarea { min-height: 220px; resize: vertical; }
+        .btn-group { margin-top: 24px; display: flex; gap: 8px; }
+        .btn {
+            display: inline-block;
+            padding: 10px 14px;
+            border-radius: 8px;
+            text-decoration: none;
+            border: 1px solid transparent;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background: #2563eb;
+            color: #fff;
+        }
+        .btn-primary:hover { background: #1d4ed8; }
+        .btn-secondary {
+            background: #fff;
+            color: #374151;
+            border-color: #d1d5db;
+        }
+        .btn-secondary:hover { background: #f9fafb; }
+    </style>
+</head>
 <body>
-<h1>✏️ 글 수정</h1>
-<form th:action="@{/board/edit/{id}(id=${board.id})}" method="post">
-    <input type="text" name="title" th:value="${board.title}" required><br>
-    <input type="text" name="writer" th:value="${board.writer}" required><br>
-    <textarea name="content" th:text="${board.content}" required></textarea><br>
-    <button type="submit">수정 완료</button>
-    <a th:href="@{/board/view/{id}(id=${board.id})}">취소</a>
-</form>
+<div class="container">
+    <h1>글 수정</h1>
+    <form th:action="@{/board/edit/{id}(id=${board.id})}" method="post">
+        <div class="form-group">
+            <label for="title">제목</label>
+            <input id="title" type="text" name="title" th:value="${board.title}" required>
+        </div>
+        <div class="form-group">
+            <label for="writer">작성자</label>
+            <input id="writer" type="text" name="writer" th:value="${board.writer}" required>
+        </div>
+        <div class="form-group">
+            <label for="content">내용</label>
+            <textarea id="content" name="content" required th:text="${board.content}"></textarea>
+        </div>
+        <div class="btn-group">
+            <button type="submit" class="btn btn-primary">수정 완료</button>
+            <a th:href="@{/board/view/{id}(id=${board.id})}" class="btn btn-secondary">취소</a>
+        </div>
+    </form>
+</div>
 </body>
 </html>
