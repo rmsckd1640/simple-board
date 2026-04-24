@@ -34,4 +34,11 @@ public class Board {
         this.password = password;
         this.createdDate = LocalDateTime.now();
     }
+
+    //데이터 수정을 위한 메서드
+    public void update(String title, String content, String writer){
+        this.title = title;
+        this.content = content;
+        this.writer = writer;
+    }
 }
