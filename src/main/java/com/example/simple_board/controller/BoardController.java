@@ -76,5 +76,12 @@ public class BoardController {
         return "redirect:/board/view/" + id; //수정 후 상세 글로 이동
     }
 
-
+    /**
+     * 삭제 실행
+     */
+    @GetMapping("/board/delete/{id}")
+    public String delete(@PathVariable Long id){
+        boardService.delete(id);
+        return "redirect:/board/list";
+    }
 }

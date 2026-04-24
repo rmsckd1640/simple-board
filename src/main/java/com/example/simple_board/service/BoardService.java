@@ -48,4 +48,8 @@ public class BoardService {
         board.update(dto.getTitle(), dto.getContent(), dto.getWriter());
     }
 
+    @Transactional
+    public void delete(Long id){
+        boardRepository.deleteById(id);
+    }
 }
